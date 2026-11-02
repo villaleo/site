@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+@theme {
+    --font-ubuntu: var(--font-ubuntu);
+}
