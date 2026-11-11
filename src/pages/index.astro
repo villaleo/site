@@ -1,14 +1,16 @@
 ---
 import Root from "../layouts/Root.astro";
+import Nav from "../components/Nav.astro";
 ---
 
 <Root title="villaleobos • site">
-    <div class="bg-background text-text h-screen">
-        <div class="p-3">
-            <h1 class="text-4xl text-primary">Leo Villalobos</h1>
-            <p class="text-secondary">
+    <div class="p-3 bg-background text-text h-screen">
+        <Nav class:list='mb-4' />
+        <div class="p-3 border border-primary">
+            <h1 class="text-4xl text-primary font-source-serif">Leo Villalobos</h1>
+            <p class="text-secondary font-unifontex">
                 Welcome to my digital space. It's not much (yet), but it's
-                honest work. for
+                honest work.
             </p>
         </div>
     </div>

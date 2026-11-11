@@ -1,0 +1,37 @@
+---
+import "../styles/global.css";
+
+const {class: className, ...rest} = Astro.props;
+---
+
+<div class:list={[className]} {...rest}>
+    <nav class="text-text grid grid-cols-1 sm:grid-cols-3 gap-1.5">
+        <a
+            class="hover:cursor-default hover:text-primary active:text-primary"
+            href="/#projects"
+            aria-label="projects"
+        >
+            <div class="p-1 border border-primary">
+                Projects
+            </div>
+        </a>
+        <a
+            class="hover:cursor-default hover:text-primary active:text-primary"
+            href="/#blog"
+            aria-label="blog"
+        >
+            <div class="p-1 border border-primary">
+                Blog
+            </div>
+        </a>
+        <a
+            class="hover:cursor-default hover:text-primary active:text-primary"
+            href="/#about"
+            aria-label="about"
+        >
+            <div class="p-1 border border-primary">
+                About
+            </div>
+        </a>
+    </nav>
+</div>
