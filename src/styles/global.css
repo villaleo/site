@@ -8,4 +8,10 @@
 
 @theme {
     --font-ubuntu: var(--font-ubuntu);
+
+    --color-text: #f5f1f0;
+    --color-background: #15100e;
+    --color-primary: #c4b1ab;
+    --color-secondary: #93b003;
+    --color-accent: #34d557;
 }
