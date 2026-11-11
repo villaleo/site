@@ -7,7 +7,9 @@
 }
 
 @theme {
-    --font-ubuntu: var(--font-ubuntu);
+    --font-silkscreen: var(--font-silkscreen);
+    --font-unifontex: var(--font-unifontex);
+    --font-source-serif: var(--font-source-serif-4);
 
     --color-text: #f5f1f0;
     --color-background: #15100e;

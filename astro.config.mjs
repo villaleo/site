@@ -9,8 +9,18 @@ export default defineConfig({
     fonts: [
         {
             provider: fontProviders.fontsource(),
-            name: "Ubuntu",
-            cssVariable: "--font-ubuntu",
+            name: "Silkscreen",
+            cssVariable: "--font-silkscreen",
+        },
+        {
+            provider: fontProviders.fontsource(),
+            name: "UnifontEX",
+            cssVariable: "--font-unifontex",
+        },
+        {
+            provider: fontProviders.fontsource(),
+            name: "Source Serif 4",
+            cssVariable: "--font-source-serif",
         },
     ],
 });

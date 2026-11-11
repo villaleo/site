@@ -15,11 +15,13 @@ const { title } = Astro.props;
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-        <Font cssVariable="--font-ubuntu" preload />
+        <Font cssVariable="--font-silkscreen" preload />
+        <Font cssVariable="--font-unifontex" preload />
+        <Font cssVariable="--font-source-serif" preload />
         <title>{title}</title>
         <style>
             * {
-                font-family: var(--font-ubuntu);
+                font-family: var(--font-silkscreen);
             }
         </style>
     </head>
