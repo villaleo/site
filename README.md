@@ -1,4 +1,3 @@
-## dev-site
+## Leo's Site
 
-The codebase for [villaleobos.dev](https://villaleobos.dev/), my developer site
-where I write blogs and share things I'm working on.
+The codebase for my [website](https://villaleobos.dev/) where I write blogs and share things I'm working on.
