@@ -1,17 +1,48 @@
 ---
 import Root from "../layouts/Root.astro";
 import Nav from "../components/Nav.astro";
+import { getCollection } from "astro:content";
+import { SITE } from "../config";
+
+const greetings = await getCollection('greetings')
+    .then(entries => entries.map(entry => entry.data.msg))
+    .catch(error => {
+        Astro.logger.warn('failed to load greetings collection:');
+        Astro.logger.warn(error);
+        Astro.logger.info('using default greetings instead.');
+        return ['hello', 'welcome'];
+    });
+
+const greetIndex = Math.floor(Math.random() * greetings.length);
+const greetMsg = greetings[greetIndex];
 ---
 
-<Root title="villaleobos • site">
-    <div class="p-3 bg-background text-text h-screen">
-        <Nav class:list='mb-4' />
-        <div class="p-3 border border-primary">
-            <h1 class="text-4xl text-primary font-source-serif">Leo Villalobos</h1>
-            <p class="text-secondary font-unifontex">
-                Welcome to my digital space. It's not much (yet), but it's
-                honest work.
-            </p>
-        </div>
-    </div>
+<Root title={SITE.title}>
+    <main class="p-5 lg:p-20 h-screen lg-split-pane">
+        <section id="home-feed">
+            <Nav />
+            <div class="mt-5 border-primary-md">
+                <h1 class="text-2xl md:text-3xl lg:text-4xl text-primary font-source-serif">
+                    {greetMsg}
+                </h1>
+                <p class="mt-2 font-unifontex">
+                    Welcome to my digital space! It's not much (yet), but it's
+                    honest work.
+                </p>
+                <span class="mt-2 font-unifontex text-secondary">
+                    Zero AI was used in the development of this site.
+                </span>
+            </div>
+            <div class="p-1 px-2 mt-1 mb-5 bg-primary inline-block">
+                <span class="text-background font-silkscreen">
+                    Developed by Leo Villalobos
+                </span>
+            </div>
+        </section>
+        <section id="news-feed">
+            <div class="border-primary-md">
+                <p>More coming soon :)</p>
+            </div>
+        </section>
+    </main>
 </Root>

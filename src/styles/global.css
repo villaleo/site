@@ -6,6 +6,14 @@
     box-sizing: border-box;
 }
 
+.lg-split-pane {
+    @apply lg:gap-5 lg:grid lg:grid-cols-2;
+}
+
+.border-primary-md {
+    @apply p-3.5 border-3 lg:border-5 border-primary border-double;
+}
+
 @theme {
     --font-silkscreen: var(--font-silkscreen);
     --font-unifontex: var(--font-unifontex);
