@@ -1,0 +1,16 @@
+[
+    { "id": 0, "msg": "hello" },
+    { "id": 1, "msg": "what's up?" },
+    { "id": 2, "msg": "hey!" },
+    { "id": 3, "msg": "welcome :)" },
+    { "id": 4, "msg": "good to see you" },
+    { "id": 5, "msg": "welcome to my site" },
+    { "id": 6, "msg": "how's it going?" },
+    { "id": 7, "msg": "i'm happy you're here" },
+    { "id": 8, "msg": "welcome, welcome" },
+    { "id": 9, "msg": "hey" },
+    { "id": 10, "msg": "nice to see you!" },
+    { "id": 11, "msg": "but nobody came." },
+    { "id": 12, "msg": "greetings, human (or so i hope)" },
+    { "id": 13, "msg": "built by a human, for humans" }
+]
