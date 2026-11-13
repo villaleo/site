@@ -4,6 +4,8 @@ import Nav from "../components/Nav.astro";
 import { getCollection } from "astro:content";
 import { SITE } from "../config";
 
+export const prerender = false
+
 const greetings = await getCollection('greetings')
     .then(entries => entries.map(entry => entry.data.msg))
     .catch(error => {
