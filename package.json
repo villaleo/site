@@ -16,7 +16,11 @@
         "@astrojs/cloudflare": "^14.4.8",
         "@tailwindcss/vite": "^4.3.3",
         "astro": "^7.4.4",
+        "jsdom": "^31.0.1",
         "tailwindcss": "^4.3.3",
         "wrangler": "^4.162.0"
+    },
+    "devDependencies": {
+        "@types/jsdom": "^30.0.0"
     }
 }
