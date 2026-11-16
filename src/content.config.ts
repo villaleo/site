@@ -18,6 +18,8 @@ const newsfeed = defineCollection({
         guid: z.string(),
         title: z.string(),
         url: z.url(),
+        publicationDate: z.string(),
+        description: z.string(),
     }),
 });
 

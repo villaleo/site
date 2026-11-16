@@ -1,8 +1,11 @@
 ---
-import Root from "../layouts/Root.astro";
+import Frame from "../components/Frame.astro";
 import Nav from "../components/Nav.astro";
-import { getCollection } from "astro:content";
+import NewsFeed from "../components/NewsFeed.astro";
+import Root from "../layouts/Root.astro";
 import { SITE } from "../config";
+
+import { getCollection } from "astro:content";
 
 export const prerender = false
 
@@ -20,31 +23,28 @@ const greetMsg = greetings[greetIndex];
 ---
 
 <Root title={SITE.title}>
-    <main class="p-5 lg:p-20 h-screen lg-split-pane">
-        <section id="home-feed">
-            <Nav />
-            <div class="mt-5 border-primary-md">
-                <h1 class="text-2xl md:text-3xl lg:text-4xl text-primary font-source-serif">
-                    {greetMsg}
-                </h1>
-                <p class="mt-2 font-unifontex">
-                    Welcome to my digital space! It's not much (yet), but it's
-                    honest work.
-                </p>
-                <span class="mt-2 font-unifontex text-secondary">
-                    Zero AI was used in the development of this site.
-                </span>
-            </div>
-            <div class="p-1 px-2 mt-1 mb-5 bg-primary inline-block">
-                <span class="text-background font-silkscreen">
-                    Developed by Leo Villalobos
-                </span>
-            </div>
-        </section>
-        <section id="news-feed">
-            <div class="border-primary-md">
-                <p>More coming soon :)</p>
-            </div>
+    <main class="p-5 h-screen flex flex-col gap-5 lg:flex lg:flex-row lg:gap-15 lg:p-20">
+        <header class="lg:w-[65%]">
+            <Nav class:list={'mb-10'} />
+            <Frame label="Developed by Leo Villalobos">
+                <div class="p-3.5">
+                    <h1 class="text-2xl md:text-3xl lg:text-4xl text-primary font-source-serif">
+                        {greetMsg}
+                    </h1>
+                    <p class="mt-2">
+                        Welcome to my digital space! It's not much (yet), but it's
+                        honest work.
+                    </p>
+                    <p class="mt-2.5 text-secondary">
+                        Zero AI was used in the development of this site.
+                    </p>
+                </div>
+            </Frame>
+        </header>
+        <section id="news-feed" class="lg:w-[35%]">
+            <Frame label="News" class:list={['h-64 lg:h-200']}>
+                <NewsFeed />
+            </Frame>
         </section>
     </main>
 </Root>

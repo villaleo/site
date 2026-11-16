@@ -1,3 +1,4 @@
+import { unescapeHTML } from "astro/compiler-runtime";
 import type { NewsfeedItem } from "./types";
 
 import type { AstroIntegrationLogger } from "astro";
@@ -16,20 +17,25 @@ function buildNewsfeedFromDoc(
 
     const items = doc.querySelectorAll("item");
     for (const item of items) {
-        const guid = item.querySelector("guid")?.textContent;
-        const title = item.querySelector("title")?.textContent;
+        const postId = item.querySelector("post-id")?.textContent;
+        const title = item.querySelector("title")?.textContent || "Untitled";
         const url = item.querySelector("link")?.textContent;
+        const publicationDate = item.querySelector("pubdate");
+        const escapedDescription =
+            item.querySelector("description")?.textContent;
 
-        if (!guid || !title || !url) {
-            const entry = `{guid='${guid} title='${title}' url='${url}'}`;
-            logger.info(`skipping bad entry: ${entry}`);
-            continue; // skip bad entries
+        if (!postId || !url || !escapedDescription) {
+            logger.info(`skipping over feed item`);
+            // skip items missing critical components
+            continue;
         }
 
         newsfeedItems.push({
-            guid,
+            guid: postId,
             title,
             url,
+            publicationDate: "", // MARK: temporarily disabled
+            description: escapedDescription,
         });
     }
 
@@ -77,6 +83,8 @@ export function newsfeedLoader() {
             guid: z.string(),
             title: z.string(),
             url: z.url(),
+            publicationDate: z.string(),
+            description: z.string(),
         }),
     } satisfies Loader;
 }

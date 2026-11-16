@@ -1,0 +1,30 @@
+---
+import "../styles/global.css";
+
+import { getCollection } from "astro:content";
+
+const newsfeed = await getCollection('newsfeed')
+    .then(feed => feed.map(item => item.data))
+    .catch(error => {
+        Astro.logger.warn('failed to load newsfeed collection:');
+        Astro.logger.warn(error);
+        return [];
+    })
+---
+
+<ul class="bg-background">
+    {newsfeed.map(({title, url, description}) => (
+        <li class="p-3.5 link even:bg-background-secondary">
+            <a class="font-silkscreen" href={url}>{title}</a>
+            <p class="mt-2.5 truncate" >{description}</p>
+        </li>
+    ))}
+</ul>
+
+<style>
+    @reference "../styles/global.css";
+    
+    .link {
+        @apply hover:cursor-pointer hover:text-secondary active:text-secondary;
+    }
+</style>

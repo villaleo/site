@@ -6,12 +6,8 @@
     box-sizing: border-box;
 }
 
-.lg-split-pane {
-    @apply lg:gap-5 lg:grid lg:grid-cols-2;
-}
-
 .border-primary-md {
-    @apply p-3.5 border-3 lg:border-5 border-primary border-double;
+    @apply border-3 lg:border-5 border-primary border-double;
 }
 
 @theme {
@@ -24,4 +20,6 @@
     --color-primary: #c4b1ab;
     --color-secondary: #93b003;
     --color-accent: #34d557;
+
+    --color-background-secondary: #1f1714;
 }
