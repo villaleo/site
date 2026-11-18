@@ -1,13 +1,10 @@
-import { unescapeHTML } from "astro/compiler-runtime";
-import type { NewsfeedItem } from "./types";
+import { NewsFeedLoaderSchema, type NewsfeedItem } from "./types";
 
 import type { AstroIntegrationLogger } from "astro";
 import type { Loader } from "astro/loaders";
-import { z } from "astro/zod";
 import { JSDOM } from "jsdom";
 
-export const feedTitle = "Pivot to AI";
-export const feedUrl = new URL("https://pivot-to-ai.com/feed/");
+const FEED_URL = new URL("https://pivot-to-ai.com/feed/");
 
 function buildNewsfeedFromDoc(
     doc: Document,
@@ -15,18 +12,16 @@ function buildNewsfeedFromDoc(
 ): NewsfeedItem[] {
     let newsfeedItems = [] as NewsfeedItem[];
 
-    const items = doc.querySelectorAll("item");
-    for (const item of items) {
+    for (const item of doc.querySelectorAll("item")) {
         const postId = item.querySelector("post-id")?.textContent;
         const title = item.querySelector("title")?.textContent || "Untitled";
         const url = item.querySelector("link")?.textContent;
-        const publicationDate = item.querySelector("pubdate");
+        const publicationDateStr = item.querySelector("pubDate")?.textContent;
         const escapedDescription =
             item.querySelector("description")?.textContent;
 
-        if (!postId || !url || !escapedDescription) {
+        if (!postId || !url || !escapedDescription || !publicationDateStr) {
             logger.info(`skipping over feed item`);
-            // skip items missing critical components
             continue;
         }
 
@@ -34,7 +29,7 @@ function buildNewsfeedFromDoc(
             guid: postId,
             title,
             url,
-            publicationDate: "", // MARK: temporarily disabled
+            publicationDate: new Date(publicationDateStr),
             description: escapedDescription,
         });
     }
@@ -48,8 +43,9 @@ export function newsfeedLoader() {
 
     return {
         name: "newsfeed",
+        schema: NewsFeedLoaderSchema,
         load: async ({ store, parseData, logger }) => {
-            const feed = await fetch(feedUrl)
+            const feed = await fetch(FEED_URL)
                 .then((response) => {
                     logger.info("fetching feed items..");
                     return response.text();
@@ -72,19 +68,11 @@ export function newsfeedLoader() {
                 });
 
             store.clear();
-
             for (const item of feed) {
                 const id = item.guid;
                 const data = await parseData({ id, data: item });
                 store.set({ id, data });
             }
         },
-        schema: z.object({
-            guid: z.string(),
-            title: z.string(),
-            url: z.url(),
-            publicationDate: z.string(),
-            description: z.string(),
-        }),
     } satisfies Loader;
 }
